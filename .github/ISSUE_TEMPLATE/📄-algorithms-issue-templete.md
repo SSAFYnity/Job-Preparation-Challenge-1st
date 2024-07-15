@@ -6,7 +6,7 @@ title: "[YYMMDD~YYMMDD] 사이트 - 제목"
 
 ### 문제 개요
 
-- 사이트 : SW Expert Academy / Baekjoon / CodeTree
-- 번호 : 
-- 제목 : 
-- 링크 :
+- 사이트 : Baekjoon
+- 번호 : 5622
+- 제목 : 다이얼
+- 링크 : https://www.acmicpc.net/problem/5622
