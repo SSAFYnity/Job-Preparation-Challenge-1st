@@ -18,7 +18,7 @@ int solution(vector<int> bandage, int health, vector<vector<int>> attacks) {
         time++;
 
         // АјАн
-            if (attacks[attackCnt][0] == time && attackCnt < attacks.size()) {
+            if (attackCnt < attacks.size() && attacks[attackCnt][0] == time) {
                 answer -= attacks[attackCnt][1];
                 continueCnt = 0;
                 attackCnt++;
@@ -37,7 +37,7 @@ int solution(vector<int> bandage, int health, vector<vector<int>> attacks) {
             }
         if (answer > health) answer = health;
         if (answer <= 0) return -1;
-        if (attackCnt = attacks.size()) break;
+        if (attackCnt == attacks.size()) break;
     }
 
 
