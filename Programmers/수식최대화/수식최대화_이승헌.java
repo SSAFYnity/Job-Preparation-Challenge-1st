@@ -11,8 +11,13 @@ public class 수식최대화_이승헌 {
     static long result = -1;
 
     public static void main(String[] args) {
+        result = -1;
         solution("100-200*300-500+20"); // 60420
+        System.out.println(result);
+        result = -1;
         solution("50*6-3*2"); // 300
+        System.out.println(result);
+
     }
 
     public static long solution(String expression) {
@@ -41,84 +46,52 @@ public class 수식최대화_이승헌 {
         }
 
         int size = queOper.size();
+
+        for (int idx = 0; idx < 3; idx++) {
+            Queue<String> copyOper = new ArrayDeque<>(queOper);
+            Queue<Long> copyNum = new ArrayDeque<>(queNum);
+
+            if ((bit & (1 << idx)) == 0) { // plus
+                bit |= (1 << idx);
+                getBit(copyOper, copyNum, size, idx);
+                solve(new ArrayDeque<>(copyOper), new ArrayDeque<>(copyNum), bit);
+                bit ^= (1 << idx);
+            }
+        }
+    }
+
+    private static void getBit(Queue<String> copyOper, Queue<Long> copyNum, int size, int idx) {
         long curNum;
+        Queue<String> tempOper = new ArrayDeque<>();
+        Queue<Long> tempNum = new ArrayDeque<>();
 
-        Queue<String> copyOper = new ArrayDeque<>(queOper);
-        Queue<Long> copyNum = new ArrayDeque<>(queNum);
+        curNum = copyNum.poll();
+        for (int i = 0; i < size; i++) {
+            String oper = copyOper.poll();
 
-        if ((bit & (1)) == 0) { // plus
-            Queue<String> tempOper = new ArrayDeque<>();
-            Queue<Long> tempNum = new ArrayDeque<>();
-            bit |= (1);
-            curNum = copyNum.poll();
-            for (int i = 0; i < size; i++) {
-                String oper = copyOper.poll();
-
-                if (!oper.equals(OPERATIONS[0])) {
-                    tempOper.add(oper);
-                    tempNum.add(curNum);
-                    curNum = copyNum.poll();
-                    continue;
-                }
-                curNum += copyNum.poll();
+            if (!oper.equals(OPERATIONS[idx])) {
+                tempOper.add(oper);
+                tempNum.add(curNum);
+                curNum = copyNum.poll();
+                continue;
             }
-            tempNum.add(curNum);
-            solve(tempOper, tempNum, bit);
 
-            bit ^= (1);
-        }
-
-        copyOper.addAll(queOper);
-        copyNum.addAll(queNum);
-
-        if ((bit & (1 << 1)) == 0) { // minus
-            Queue<String> tempOper = new ArrayDeque<>();
-            Queue<Long> tempNum = new ArrayDeque<>();
-            bit |= (1 << 1);
-            curNum = copyNum.poll();
-
-            for (int i = 0; i < size; i++) {
-                String oper = copyOper.poll();
-                if (!oper.equals(OPERATIONS[1])) {
-                    tempOper.add(oper);
-                    tempNum.add(curNum);
-                    curNum = copyNum.poll();
-
+            switch (idx) {
+                case 0 :
+                    curNum += copyNum.poll();
                     continue;
-                }
-                curNum -= copyNum.poll();
-
+                case 1 :
+                    curNum -= copyNum.poll();
+                    continue;
+                case 2 :
+                    curNum *= copyNum.poll();
+                    continue;
             }
-            tempNum.add(curNum);
-            solve(tempOper, tempNum, bit);
-            bit ^= (1 << 1);
 
         }
+        tempNum.add(curNum);
 
-        copyOper.addAll(queOper);
-        copyNum.addAll(queNum);
-
-        if ((bit & (1 << 2)) == 0) { // multi
-            Queue<String> tempOper = new ArrayDeque<>();
-            Queue<Long> tempNum = new ArrayDeque<>();
-            bit |= (1 << 2);
-            curNum = copyNum.poll();
-
-            for (int i = 0; i < size; i++) {
-                String oper = copyOper.poll();
-                if (!oper.equals(OPERATIONS[2])) {
-                    tempOper.add(oper);
-                    tempNum.add(curNum);
-                    curNum = copyNum.poll();
-
-                    continue;
-                }
-                curNum *= copyNum.poll();
-
-            }
-            tempNum.add(curNum);
-            solve(tempOper, tempNum, bit);
-            bit ^= (1 << 2);
-        }
+        copyOper.addAll(tempOper);
+        copyNum.addAll(tempNum);
     }
 }
