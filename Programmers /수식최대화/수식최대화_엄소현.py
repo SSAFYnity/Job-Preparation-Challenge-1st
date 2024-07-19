@@ -1,5 +1,5 @@
-import itertools
-            
+from itertools import permutations
+
 def parsing_expression(expression):
     num = ""
     parsed_expression = []
@@ -29,14 +29,13 @@ def calc(op, expression):
 
             del expression[i+1]
             del expression[i-1]
-            
         else:
             i += 1
     return expression
     
     
 def solution(expression):
-    case = list(itertools.permutations(["*", "-", "+"], 3))
+    case = list(permutations(["*", "-", "+"], 3))
     expression = parsing_expression(expression)
     max_num = 0
 
