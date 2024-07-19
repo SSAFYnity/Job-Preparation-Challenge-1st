@@ -3,7 +3,6 @@ import java.io.*;
 class Solution {
 
     static int[][] arr;     // 단방향 연결 정보를 담는 배열(갈림길이 1개면 0열에 0이 아닌 값, 갈림길이 2개라면 0열과 1열에 0이 아닌 값)
-    static boolean[][] visited;     // 방문 배열
     static int answer;      // 목적지(99)에 도착할 수 있으면 1, 아니면 0
 
     public static void main(String args[]) throws Exception {
@@ -18,7 +17,6 @@ class Solution {
             String[] secondInput = br.readLine().split(" ");
             answer = 0;
             arr = new int[100][2];
-            visited = new boolean[100][2];
             for(int i=0; i<pathCnt*2; i+=2) {		// 순서쌍 입력받기
                 int start = Integer.parseInt(secondInput[i]);
                 int end = Integer.parseInt(secondInput[i + 1]);
@@ -46,12 +44,10 @@ class Solution {
         }
 
         for(int i=0; i<2; i++) {
-            if (arr[cur][i] == 0 || visited[cur][i]) {       // 길이 없거나 방문한 적 있음
+            if (arr[cur][i] == 0) {       // 길이 없거나 방문한 적 있음
                 return;
             }
-            visited[cur][i] = true;
             dfs(arr[cur][i]);
-            visited[cur][i] = false;
         }
     }
 }
