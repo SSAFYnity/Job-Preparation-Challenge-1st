@@ -5,7 +5,7 @@ public class Solution {
  
     public static void main(String[] args) throws Exception{
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        int T = 10;
+        // int T = 10;
          
         for(int t = 1; t<= 10 ; t++) {
             Queue<Integer> q = new LinkedList<Integer>();
@@ -37,7 +37,7 @@ public class Solution {
             }
              
             StringBuilder sb = new StringBuilder();
-            sb.append("#"+t);
+            sb.append("#"+N);
             for(int i=0;i<8;i++) {
                 sb.append(" "+q.poll());
             }
