@@ -3,9 +3,9 @@ import java.util.ArrayList;
 
 class Solution {
     static int m;      // 이모티콘 갯수
-    static List<Integer[]> discountLst = new ArrayList();       // 인덱스 순열을 담는 리스트(percent, percentArr의 인덱스로 사용)
-    static float[] percent = {0.0f, 0.9f, 0.8f, 0.7f, 0.6f};    // 할인을 적용한 후 비율
-    static int[] percentArr = {0, 10, 20, 30, 40};              // 사용자의 구매 기준 퍼센트와 비교하기 위한 배열
+    static final List<Integer[]> discountLst = new ArrayList();       // 인덱스 순열을 담는 리스트(percent, percentArr의 인덱스로 사용)
+    static final float[] percent = {0.0f, 0.9f, 0.8f, 0.7f, 0.6f};    // 할인을 적용한 후 비율
+    static final int[] percentArr = {0, 10, 20, 30, 40};              // 사용자의 구매 기준 퍼센트와 비교하기 위한 배열
     
     public int[] solution(int[][] users, int[] emoticons) {
         int[] answer = new int[2];      // [이모티콘 플러스 서비스 가입 수, 이모티콘 팬매액]
