@@ -8,9 +8,9 @@ class Solution {
     */
     public long solution(String expression) {
         long answer = 0;        // 우승 시 받을 수 있는 가장 큰 상금 금액
-        String[] numArr = expression.split("[^0-9]+");       // 숫자 추출
-        String[] operationArr = expression.split("[0-9]+");     // 연산자 추출
-        String[][] priorityOperations = {{"+", "-", "*"}, {"+", "*", "-"}, {"-", "+", "*"},
+        final String[] numArr = expression.split("[^0-9]+");       // 숫자 추출
+        final String[] operationArr = expression.split("[0-9]+");     // 연산자 추출
+        final String[][] priorityOperations = {{"+", "-", "*"}, {"+", "*", "-"}, {"-", "+", "*"},
                                          {"-", "*", "+"}, {"*", "+", "-"}, {"*", "-", "+"}};        // 최대 6가지라서 직접 생성함
         
         for(String[] operations : priorityOperations) {     // 연산자 조합 하나를 뽑음
