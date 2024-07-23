@@ -1,6 +1,6 @@
 import java.util.*;
 
-class 광물캐기_강민정 {
+class Solution {
 
     static class Mineral {
         private int diamond;
@@ -14,9 +14,13 @@ class 광물캐기_강민정 {
         }
     }
     
-    static int[][] scoreBoard;
-    static List<Mineral> list;
+    static final int[][] scoreBoard;      // 곡괭이별 광물을 캘 때의 피로도
+    static List<Mineral> list;      // 미네랄 5개를 캘때, 곡괭이별 피로도의 합
     
+    /*
+        picks: [dia, iron, stone] 0 <= 각 곡괭이별 갯수 <=5
+        minerals: 3개의 문자열("diamond" / "iron" / "stone")로 이루어진 배열
+    */
     public int solution(int[] picks, String[] minerals) {
         int answer = 0;
         
@@ -24,7 +28,7 @@ class 광물캐기_강민정 {
         
         int totalPicks = Arrays.stream(picks).sum();        // 총 곡괭이의 수
         list = new ArrayList<>();
-        for(int i = 0; i < minerals.length; i+=5) {
+        for(int i = 0; i < minerals.length; i+=5) {     // 미네랄을 5개 연속으로 캐기
             if(totalPicks == 0) break;      // 곡괭이를 모두 다 사용
             
             int dia = 0, iron = 0, stone = 0;
@@ -41,12 +45,12 @@ class 광물캐기_강민정 {
                 stone += scoreBoard[2][val];
             }
             
-            list.add(new Mineral(dia, iron, stone));
-            totalPicks--;
+            list.add(new Mineral(dia, iron, stone));        // 미네랄을 캘때 사용한 곡괭이별 피로도의 합을 추가
+            totalPicks--;       // 곡괭이 사용 횟수 차감
         }
         
-        Collections.sort(list, ((o1, o2) -> (o2.stone - o1.stone)));
-        for(Mineral m : list) {
+        Collections.sort(list, ((o1, o2) -> (o2.stone - o1.stone)));    // 돌 곡괭이를 사용했을 때 피로도가 높은 순으로 정렬
+        for(Mineral m : list) {     // 피로도가 높은 광물을 다이아몬드 -> 철 -> 돌순으로 사용해서 캐야 이득이다.
             int dia = m.diamond;
             int iron = m.iron;
             int stone = m.stone;
