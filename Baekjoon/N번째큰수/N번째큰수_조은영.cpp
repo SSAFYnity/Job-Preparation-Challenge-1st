@@ -8,7 +8,7 @@ int main() {
 	ios_base::sync_with_stdio(false);
 	cin.tie(0);
 
-	multiset<int>ms;
+	set<int>s;
 
 	int N = 0;
 	int input = 0;
@@ -19,18 +19,18 @@ int main() {
 		for (int j = 0; j < N; j++) {
 			cin >> input;
 
-			if (ms.size() < N) ms.insert(input);
+			if (s.size() < N) s.insert(input);
 			else {
-				int minValue = *ms.begin();
+				int minValue = *s.begin();
 				if (minValue < input) {
-					ms.erase(ms.begin());
-					ms.insert(input);
+					s.erase(s.begin());
+					s.insert(input);
 				}
 			}
 		}
 	}
 
-	cout << *ms.begin() << "\n";
+	cout << *s.begin() << "\n";
 
 	return 0;
 }
