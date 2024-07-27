@@ -528,6 +528,13 @@ FodyWeavers.xsd
 ### VisualStudio Patch ###
 # Additional files built by Visual Studio
 
+.idea
+**/.idea
+.idea/**
+*.iml
+**/*.iml
+.iml
+
 # etc.
 */.DS_Store
 .DS_Store
