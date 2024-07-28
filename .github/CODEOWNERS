@@ -1,6 +1,0 @@
-# .md 파일을 제외하고 모든 파일에 대해 @SSAFYnity/24-s-summer 팀을 리뷰어로 할당
-# Ignore .md files
-*.md
-
-# 모든 파일에 대해 @SSAFYnity/24-s-summer 팀을 리뷰어로 할당
-# * @SSAFYnity/24-s-summer # reviwer의 경우 15명을 초과할수 없어 언어 조사 이후 재설정 예정

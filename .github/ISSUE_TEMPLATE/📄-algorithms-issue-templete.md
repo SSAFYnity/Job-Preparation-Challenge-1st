@@ -7,6 +7,5 @@ title: "[YYMMDD~YYMMDD] 사이트 - 제목"
 ### 문제 개요
 
 - 사이트 : SW Expert Academy / Baekjoon / CodeTree
-- 번호 : 
 - 제목 : 
 - 링크 :
