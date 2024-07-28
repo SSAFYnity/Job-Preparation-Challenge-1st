@@ -3,7 +3,7 @@ const github = require('@actions/github');
 
 async function run() {
   try {
-    const token = process.env.GH_TOKEN;
+    const token = process.env.GITHUB_TOKEN;
     if (!token) {
       throw new Error('GitHub token is not provided');
     }
