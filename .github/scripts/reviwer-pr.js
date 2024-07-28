@@ -18,17 +18,17 @@ function getRandomElements(array, count) {
 async function run() {
   try {
     const token = process.env.GH_TOKEN;
+    const javaReviwer = process.env.REVIWER_JAVA;
+    const pythonReviwer = process.env.REVIWER_PYTHON;
+    const javaScriptReviwer = process.env.REVIWER_JAVASCRIPT;
+    const cppReviwer = process.env.REVIWER_CPP;
+    const author = process.env.ACTOR;
+
+    console.log(author);
+    
     if (!token) {
       throw new Error('GitHub token is not provided');
     }
-
-    const author = process.env.ACTOR;
-    const reviewersMap = {
-      '.java': process.env.REVIEWER_JAVA,
-      '.py': process.env.REVIEWER_PYTHON,
-      '.js': process.env.REVIEWER_JAVASCRIPT,
-      '.cpp': process.env.REVIEWER_CPP,
-    };
 
     const octokit = github.getOctokit(token);
     const context = github.context;
@@ -43,10 +43,16 @@ async function run() {
 
     let reviewers = [];
     files.forEach(file => {
-      const ext = Object.keys(reviewersMap).find(ext => file.filename.endsWith(ext));
-      if (ext) {
-        reviewersMap[ext].split(',').forEach(reviewer => reviewers.push(reviewer.trim()));
-      }
+      // 확장자에 따른 reviwer 추가
+        if (file.filename.endsWith(".java")) {
+          javaReviwer.split(",").forEach(e => { reviewers.push(e) });
+        } else if (file.filename.endsWith(".py")) {
+          pythonReviwer.split(",").forEach(e => { reviewers.push(e) });
+        } else if (file.filename.endsWith(".js")) {
+          javaScriptReviwer.split(",").forEach(e => { reviewers.push(e) });
+        } else if (file.filename.endsWith(".cpp")) {
+          cppReviwer.split(",").forEach( e => { reviewers.push(e) });
+        }
     });
 
     reviewers = reviewers.filter(reviewer => reviewer !== author);
