@@ -2,7 +2,7 @@ from heapq import heappush,heappop
 import sys
 input = sys.stdin.readline
 
-def solution(N:int,M:int,graph:list[dict])->int:
+def solution(N:int,M:int,graph:list[tuple[int]])->int:
     pri_que = [(0,1)]
     visit = [-1]*(N+1)
     visit[1] = 0
