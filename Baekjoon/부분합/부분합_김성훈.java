@@ -16,7 +16,7 @@ public class Main {
         n = Integer.parseInt(st.nextToken());
         s = Integer.parseInt(st.nextToken());
 
-        inputArr = new int[n + 1];
+        inputArr = new int[n + 1]; 
         st = new StringTokenizer(br.readLine());
         for (int i = 1; i <= n; i++) {
             inputArr[i] = Integer.parseInt(st.nextToken());
