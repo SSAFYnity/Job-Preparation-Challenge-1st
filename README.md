@@ -36,7 +36,7 @@ SSAFYnity 동문회원을 위해 주기적으로 운영하는 취준챌린지! <
 ### 🏷️ 라벨 규칙
 | 작성 범위 | 등록 라벨 | 설명 | 작성자 |
 | :----: | :---: | :---:| :---:|
-| Issue | Easy, Hard, Noaml | 책정 문제 난이도 | 챌린지 운영자 `@eona1301`
+| Issue | Easy, Hard, Noaml | 책정 문제 난이도 | 챌린지 운영자 `@hadevyi`
 | Pull Request | Easy, Hard, Nomal | 체감 문제 난이도 | 참여자 |
 | Pull Reuqest | C, C++, Java, JavaScript, Python | 문제 풀이한 언어 | Github Action 자동 배정 |
 - Pull Request에는 체감 난도 1개를 선택해주시면 다음 문제 출제 때 참고합니다.
@@ -48,7 +48,7 @@ SSAFYnity 동문회원을 위해 주기적으로 운영하는 취준챌린지! <
 - Pull Request에 Template을 만들어두었습니다! 양식에 맞게 작성해주세요.
 - Reviewer는 Github Action을 통해 본인이 풀이하겠다고 한 언어를 제출한 인원으로 배정됩니다.
 - Merge 조건 : 3명 이상의 Approve가 필요합니다.
-- 이번 취준 챌린지 운영자에게 Review를 받고 싶다면, PR 본문에 `@eona1301`을 태그해주세요.
+- 이번 취준 챌린지 운영자에게 Review를 받고 싶다면, PR 본문에 `@hadevyi`을 태그해주세요.
 
 <br>
 
