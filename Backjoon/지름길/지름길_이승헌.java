@@ -8,13 +8,14 @@ import java.util.PriorityQueue;
 import java.util.StringTokenizer;
 
 public class 지름길_이승헌 {
+    static PriorityQueue<Node> fast = new PriorityQueue<>();
+    static int M;
+
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringTokenizer st = new StringTokenizer(br.readLine());
         int N = Integer.parseInt(st.nextToken());
-        int M = Integer.parseInt(st.nextToken());
-
-        PriorityQueue<Node> fast = new PriorityQueue<>();
+        M = Integer.parseInt(st.nextToken());
 
         for (int idx = 0; idx < N; idx++) {
             st = new StringTokenizer(br.readLine());
@@ -26,17 +27,17 @@ public class 지름길_이승헌 {
             }
             fast.add(new Node(start, end, dis));
         }
-
-        System.out.println(solve(fast, M));
+        System.out.println(solve());
     }
 
-    private static int solve(PriorityQueue<Node> fast, int M) {
+    private static int solve() {
 
         PriorityQueue<Node> pq = new PriorityQueue<>();
         pq.offer(new Node(0, 0, 0));
         int[] dp = new int[M + 1];
         Arrays.fill(dp, Integer.MAX_VALUE);
         int nextDis;
+        Node firstLoad;
 
         while (!pq.isEmpty()) {
             Node cur = pq.poll();
@@ -47,8 +48,13 @@ public class 지름길_이승헌 {
             while (!fast.isEmpty() && fast.peek().start < cur.start) {
                 fast.poll();
             }
+            firstLoad = fast.peek();
 
             for (Node nextLoad : fast) {
+                if (nextLoad.start > firstLoad.end) {
+                    continue;
+                }
+
                 nextDis = cur.distance + nextLoad.distance + (nextLoad.start - cur.start);
                 if (cur.start > nextLoad.start || dp[nextLoad.end] < nextDis) {
                     continue;
