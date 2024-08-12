@@ -1,34 +1,26 @@
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 
 public class 1, 2, 3 더하기 4_김현진 {
-    
-    public static void main (String[] args) throws IOException {
-        
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+    public static void main(String[] args) throws IOException {
+        BufferedReader sc = new BufferedReader(new InputStreamReader(System.in));
         StringBuilder sb = new StringBuilder();
-        
-        int T = Integer.parseInt(br.readLine());
-        
-        int[][] dp = new int[4][10001];
-            
-        dp[0][0] = 1;
 
-        for (int j=1; j<4; j++) {
-            for (int k=0; k<=10000; k++) {
-                if (j > k) dp[j][k] = dp[j-1][k];
-                else dp[j][k] = dp[j][k-j] + dp[j-1][k];
-            }
+        int T = Integer.parseInt(sc.readLine());
+        int[] dp = new int[10001];
+
+        dp[1] = 1;
+        dp[2] = 2;
+        dp[3] = 3;
+
+        for(int i=4; i<10001; i++){
+            dp[i] = 1 + i/2 + dp[i-3];
         }
-        
-        for (int i=0; i<T; i++) {
-            
-            int n = Integer.parseInt(br.readLine());
-            
-            sb.append(dp[3][n] + "\n");
-        }
-        
-        System.out.println(sb);
-        
-        br.close();
+
+        for(int test_case=0; test_case<T; test_case++){
+            int n = Integer.parseInt(sc.readLine());
+            sb.append(dp[n]).append('\n');
+        } System.out.println(sb);
     }
 }
