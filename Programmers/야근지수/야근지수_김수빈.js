@@ -84,5 +84,3 @@ function solution(n, works) {
 
   return overnightWork
 }
-
-console.log(solution(4, [4, 3, 3]))
