@@ -8,7 +8,7 @@ read -p "걸린 시간을 입력하세요: " time
 read -p "사용한 메모리를 입력하세요: " memory
 
 # 로컬 브랜치 이름 생성
-branch_name="$name_val'_'$problem_name"
+branch_name="$name_val_$problem_name"
 
 # Git 작업 수행
 # git fetch algorithm main:master  # 필요에 따라 주석 해제
