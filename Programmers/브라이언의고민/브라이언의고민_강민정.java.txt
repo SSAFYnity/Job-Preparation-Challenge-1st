@@ -1,0 +1,85 @@
+import java.util.*;
+
+public class Solution {
+
+    public String solution(String sentence) {
+        // 결과를 저장할 StringBuilder
+        StringBuilder result = new StringBuilder();
+        // 소문자의 위치를 저장할 LinkedHashMap
+        LinkedHashMap<Character, ArrayList<Integer>> lowerCount = new LinkedHashMap<>();
+        String invalid = "invalid";
+
+        int size = sentence.length();
+
+        // 소문자의 위치를 파악
+        for (int i = 0; i < size; i++) {
+            char c = sentence.charAt(i);
+
+            if (Character.isLowerCase(c)) {
+                lowerCount.computeIfAbsent(c, k -> new ArrayList<>()).add(i);
+            }
+        }
+
+        // 단어의 시작과 끝을 추적
+        int lastEnd = -1;
+        int start = 0;
+
+        // 각 소문자의 위치를 순회
+        for (Map.Entry<Character, ArrayList<Integer>> entry : lowerCount.entrySet()) {
+            ArrayList<Integer> positions = entry.getValue();
+            int count = positions.size();
+
+            int firstPos = positions.get(0);
+            int lastPos = positions.get(count - 1);
+
+            // 규칙 1: AaA 패턴 검증
+            if (count == 1 || count >= 3) {
+                for (int i = 1; i < count; i++) {
+                    if (positions.get(i) - positions.get(i - 1) != 2) {
+                        return invalid;
+                    }
+                }
+            }
+            // 규칙 2: AbAb 패턴 검증
+            else if (count == 2) {
+                int distance = lastPos - firstPos;
+                if (distance != 2) {
+                    return invalid;
+                }
+            } else {
+                return invalid;
+            }
+
+            // 마지막 단어의 끝이 현재 단어의 시작보다 크거나 같으면 "invalid"
+            if (lastEnd >= firstPos) {
+                return invalid;
+            }
+
+            // 이전 단어를 결과에 추가
+            if (start < firstPos) {
+                result.append(removeLowerCase(sentence.substring(start, firstPos)));
+                result.append(" ");
+            }
+
+            // 현재 단어를 결과에 추가
+            result.append(removeLowerCase(sentence.substring(firstPos, lastPos + 1)));
+            result.append(" ");
+
+            // 마지막 단어의 시작과 끝을 갱신
+            lastEnd = lastPos;
+            start = lastPos + 1;
+        }
+
+        // 남은 단어를 결과에 추가
+        if (start < size) {
+            result.append(removeLowerCase(sentence.substring(start, size)));
+        }
+
+        return result.toString().trim();
+    }
+
+    // 소문자를 제거하는 메소드
+    private String removeLowerCase(String str) {
+        return str.replaceAll("[a-z]", "");
+    }
+}
