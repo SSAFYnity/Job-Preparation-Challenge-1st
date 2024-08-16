@@ -1,10 +1,9 @@
 #!/bin/bash
 
 # 문제 번호 입력 받기
-read -p "문제 번호를 입력하세요: " problem_number
-read -p "문제 번호를 입력하세요: " problem_number
-read -p "문제 번호를 입력하세요: " problem_number
-read -p "문제 번호를 입력하세요: " problem_number
+read -p "문제 번호를 입력하세요: " remote_name
+
+
 # 로컬 브랜치 이름 생성
 branch_name="${problem_number}"
 
