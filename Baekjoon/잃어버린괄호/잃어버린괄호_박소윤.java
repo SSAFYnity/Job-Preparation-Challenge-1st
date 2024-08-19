@@ -22,16 +22,13 @@ public class Main {
         int result = numbers[0];
         boolean existsInBracket = false;
         for (int i = 0; i < operators.length; i++) {
-            if (operators[i] == '+') {
-                if (existsInBracket) {
-                    result -= numbers[i + 1];
-                } else {
-                    result += numbers[i + 1];
-                }
-            }
             if (operators[i] == '-') {
-                result -= numbers[i + 1];
                 existsInBracket = true;
+            }
+            if (existsInBracket) {
+                result -= numbers[i + 1];
+            } else {
+                result += numbers[i + 1];
             }
         }
         System.out.println(result);
