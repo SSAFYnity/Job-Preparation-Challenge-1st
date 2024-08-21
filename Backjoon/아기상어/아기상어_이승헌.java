@@ -12,6 +12,9 @@ public class 아기상어_이승헌 {
     static int[] dx = {0, -1, 1, 0}; // 상 좌 우 하
     static int[] dy = {-1, 0, 0, 1};
     static boolean[][] visited;
+    static int[] target;
+    static int eatAble;
+
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringTokenizer st;
@@ -20,7 +23,7 @@ public class 아기상어_이승헌 {
         Shark[][] map = new Shark[N][N];
         visited = new boolean[N][N];
         BabyShark babyShark = null;
-
+        target = new int[8];
         for (int row = 0; row < N; row++) {
             st = new StringTokenizer(br.readLine());
             for (int column = 0; column < N; column++) {
@@ -31,6 +34,7 @@ public class 아기상어_이승헌 {
                     babyShark = new BabyShark(row, column, 2, 0, 0);
                     continue;
                 }
+                target[input]++;
                 map[row][column] = new Shark(row, column, input);
             }
         }
@@ -43,15 +47,16 @@ public class 아기상어_이승헌 {
         pqq.offer(shark);
         visited[shark.row][shark.col] = true;
         int result = 0;
+        eatAble = target[1];
 
-        while (!pqq.isEmpty()) {
+        while (!pqq.isEmpty() && eatAble != 0) {
             BabyShark curBaby = pqq.poll();
 
             if(map[curBaby.row][curBaby.col] != null &&  map[curBaby.row][curBaby.col].size < curBaby.size) {
                 pqq.clear();
                 map[curBaby.row][curBaby.col] = null;
                 curBaby.eat();
-
+                eatAble += target[curBaby.size];
                 clearVisited(curBaby);
                 result = curBaby.result;
             }
@@ -100,10 +105,14 @@ public class 아기상어_이승헌 {
         }
 
         public void eat() {
+            if (this.size > 6) {
+                return;
+            }
             this.eat++;
             if(this.eat == this.size){
                 this.eat = 0;
                 this.size++;
+
             }
         }
     }
