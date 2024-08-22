@@ -1,6 +1,7 @@
 #include <iostream>
 #include <math.h>
 #include <queue>
+#include <algorithm>
 #define INF 1e9;
 using namespace std;
 
@@ -56,10 +57,12 @@ bool bfs() {
 			int nextX = dx[i] + cur.x;
 			int nextY = dy[i] + cur.y;
 
-			if (isRange(nextX, nextY) && visited[nextX][nextY]) {
+			if (isRange(nextX, nextY) && !visited[nextX][nextY]) {
+				// 이동할 수 없는 경우에도 어차피 못가니까 방문을 시도했으면 모두 true처리
+				visited[nextX][nextY] = true;
+
 				// 상어보다 같거나 작은 경우에만 이동
 				if (arr[nextX][nextY] <= shark_size) {
-					visited[nextX][nextY] = true;
 					q.push({ nextX, nextY, cur.dist+1 });
 					
 					// 만약 상어보다 작고 0이 아니면 먹음
@@ -70,37 +73,34 @@ bool bfs() {
 				}
 			}
 		}
-
-		// 한칸 이동 시도 후
-
-		// 먹을 물고기가 없으면 종료
-		if (fishes.empty()) return false;
-
-		sort(fishes.begin(), fishes.end(), compare);
-
-		// 가장 우선순위 물고기
-		Position target = fishes[0];
-
-		// 물고기 먹기
-		arr[shark.x][shark.y] = 0;
-		shark.x = target.x;
-		shark.y = target.y;
-		fish_cnt++;
-		ans += target.dist;
-
-		if (fish_cnt == shark_size) {
-			shark_size++;
-			fish_cnt = 0;
-		}
-
-		return true;
 	}
+
+	// 먹을 물고기가 없으면 종료
+	if (fishes.empty()) return false;
+
+	sort(fishes.begin(), fishes.end(), compare);
+
+	// 가장 우선순위 물고기
+	Position target = fishes[0];
+
+	// 물고기 먹기
+	arr[shark.x][shark.y] = 0;
+	shark.x = target.x;
+	shark.y = target.y;
+	fish_cnt++;
+	ans += target.dist;
+
+	if (fish_cnt == shark_size) {
+		shark_size++;
+		fish_cnt = 0;
+	}
+
+	return true;
+
 }
 
 
 int main() {
-
-	int input=0, startX=0, startY=0;
 
 	cin >> N;
 
